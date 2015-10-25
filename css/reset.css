@@ -9,10 +9,6 @@ html, body{
 	height: 100%;
 	width: 100%;
 }
-body{
-	min-width: 700px;
-	background-image:url('/img/bg_img.jpg');
-}
 .clear{
 	clear: both;
 }
