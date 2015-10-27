@@ -1,5 +1,5 @@
 <?php
-    require_once './class/ready/universalValidator.class.php';
+    require_once './class/ready/Validator.class.php';
  ?>
 <!DOCTYPE html>
 <html>
@@ -9,19 +9,16 @@
 	</head>
 	<body>
         <?php
-            $validation = [
-                'name' => function($data){
-                    if(!is_string($data))
-                        return false;
-                    return true;
-                }
-            ];
+            
             $data = [
-                'name' => 'hi'
+                'fio' => '1',
+                'name' => '1',
+                'phone' => '+38(063)7200164'
             ];
-            if(universalValidator::universalValidatorOfArray($data, $validation))
-                echo 'valid';
-            else echo 'Unvalid';
+            $validator = new Validator();
+            
+            echo $validator->validate($data,'register')? 'Valid' : 'Un-valid';
+
         ?>
 	</body>
 </html>
