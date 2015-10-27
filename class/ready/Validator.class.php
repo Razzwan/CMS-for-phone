@@ -1,18 +1,16 @@
 <?php
     class Validator{
-        private $validation; 
+        
+        private $validationArray; 
+       
         public function __construct(){
 
             $this->createValidationArray();
   
         }
         
-        public function validate($data, $validationArray){
-            return $this::validatorOfArray($data, $this->validation[$validationArray]);
-        }
-        
         private function createValidationArray(){
-            $this->validation = [
+            $this->validationArray = [
                                     'register' => [
                                                     'name' => [$this, 'validateName'],
                                                     'fio' => [$this, 'validateName'],
@@ -21,13 +19,17 @@
                                 ];
         }
         
-        public function validatorOfArray($data, Array $compareArray){
+        
+        public function arrayValidator($data, $compareArrayType = null){
 
-            if(count($data)!== count($compareArray))
+            if(count($data)!= count($this->validationArray[$compareArrayType]))
                 return false;
                 
             foreach($data as $key => $value)
-                if(!isset($compareArray[$key]) || !$compareArray[$key]($value))
+                if(
+                    !isset($this->validationArray[$compareArrayType]) || 
+                    !$this->validationArray[$compareArrayType][$key]($value)
+                )
                     return false;
                         
                 return true;
@@ -38,6 +40,6 @@
         }
         
          public static function validatePhone($data){
-            return preg_match('#^\+[0-9]{2}\([0-9]{3}\)[0-9]{7}$#',$data);
+            return is_string($data) and preg_match('#^\+[0-9]{2}\([0-9]{3}\)[0-9]{7}$#',$data);
         }
     }

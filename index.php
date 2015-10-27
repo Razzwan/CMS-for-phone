@@ -19,6 +19,7 @@
             
             echo $validator->validate($data,'register')? 'Valid' : 'Un-valid';
 
+
         ?>
 	</body>
 </html>
