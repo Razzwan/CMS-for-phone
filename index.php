@@ -1,25 +1,22 @@
 <?php
-    require_once './class/ready/Validator.class.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/class/mvc/Router.class.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/class/ready/Validator.class.php';
  ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>HI</title>
-		<meta charset = "UTF-8">
-	</head>
-	<body>
+
         <?php
             
             $data = [
                 'fio' => '1',
                 'name' => '1',
-                'phone' => '+38(063)7200164'
+                'phone' => '+38(063)200164'
             ];
-            $validator = new Validator();
             
-            echo $validator->validate($data,'register')? 'Valid' : 'Un-valid';
-
+			$validator = new Validator();
+			$time = microtime(1);
+			for($i = 0 ; $i < 100000 ; $i++ )
+				$validator->arrayValidator($data,'register')? 'Valid' : 'Un-valid';
+			
+			echo '<br> Time:'.(microtime(1)-$time);
+			echo '<br> Memory usage: '.memory_get_usage()/1024/1024 .' Mb'; 
 
         ?>
-	</body>
-</html>
