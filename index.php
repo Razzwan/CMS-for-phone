@@ -14,7 +14,7 @@
 			$validator = new Validator();
 			$time = microtime(1);
 			for($i = 0 ; $i < 100000 ; $i++ )
-				$validator->arrayValidator($data,'register')? 'Valid' : 'Un-valid';
+				echo ($result = $validator->arrayValidator($data,'register')[0]) ? 'Valid' : $result[1];
 			
 			echo '<br> Time:'.(microtime(1)-$time);
 			echo '<br> Memory usage: '.memory_get_usage()/1024/1024 .' Mb'; 
